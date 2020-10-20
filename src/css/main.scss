@@ -1,0 +1,460 @@
+$colors : (primary-color: #87509c,
+    nav-hover: #643a79,
+    button1-bg: #eb7d4b,
+    button1-shadow: #c86a40,
+    button2-bg: #30bae7,
+    button2-shadow: #299ec5,
+    secondary-color: #3c5499,
+    footer-color:#344b8e,
+    font-color: #ffffff,
+    input-color: #273a71);
+
+@function color($color-name) {
+    @return map-get($map: $colors, $key: $color-name);
+}
+
+$mob-s:512px;
+$tab-s:1080px;
+
+@mixin mob-s {
+    @media (max-width:#{$mob-s}) {
+        @content;
+    }
+}
+
+@mixin tab-s {
+    @media (max-width:#{$tab-s}) {
+        @content;
+    }
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Titillium Web', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.hamburger-menu {
+    width: auto;
+}
+//Mobile - Tab Navigation
+#menu__toggle {
+    display: none;
+
+    &:checked~.menu__btn>span {
+        transform: rotate(45deg);
+    }
+
+    &:checked~.menu__btn>span::before {
+        top: 0;
+        transform: rotate(0);
+    }
+
+    &:checked~.menu__btn>span::after {
+        top: 0;
+        transform: rotate(90deg);
+    }
+
+    &:checked~ul {
+        left: 0;
+        display: block;
+    }
+}
+
+.menu__btn {
+    display: none;
+    align-items: center;
+    position: fixed;
+    top: 2.5rem;
+    right: 3rem;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+
+    @include tab-s {
+        display: flex;
+        position: fixed;
+
+        >span {
+            &::before {
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: color(font-color);
+                transition-duration: .25s;
+                content: '';
+                top: -8px;
+            }
+
+            &::after {
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: color(font-color);
+                transition-duration: .25s;
+                content: '';
+                top: 8px;
+            }
+        }
+    }
+
+    >span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: color(font-color);
+        transition-duration: .25s;
+    }
+}
+
+// Navigation Section
+nav {
+    position: fixed;
+    background-color: color(primary-color);
+    height: 5rem;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 999;
+
+    span.logo{
+            display: inline-block;
+
+        img {
+            max-width: 117px;
+            margin: 1rem 0 1rem 12rem;
+            @include tab-s {
+                display: inline-block;
+                margin: 1rem 0 1rem 5rem;
+            }
+            @include mob-s {
+                display: inline-block;
+                margin: 1rem 0 1rem 5rem;
+            }
+        }
+    }
+
+    ul {
+        float: right;
+        margin:0px 12rem 0px 0;
+        list-style: none;
+
+        @include tab-s {
+            position: absolute;
+            display: none;
+            width: 100%;
+            height: 100vh;
+            background-color: #1e2949;
+            text-align: center;
+            top: 6rem;
+            left: 0;
+            padding: 0;
+            transition: all .5s;
+        }
+
+        li {
+            display: inline-block;
+            line-height: 2.5rem;
+            margin: 1rem 1rem;
+
+            @include tab-s {
+                line-height: 3.5rem;
+                display: block;
+            }
+
+            a {
+                color: color(font-color);
+                font-size: 1rem;
+                text-transform: uppercase;
+                text-decoration: none;
+                padding: 5px 13px;
+                border-radius: 5px;
+                transition: all .25s;
+
+                @include tab-s {
+                    font-size: 1.2rem;
+                    font-weight: 550;
+                }
+
+                &.active {
+                    background: color(nav-hover);
+                }
+
+                &:hover {
+                    background: color(nav-hover);
+                }
+
+                @include tab-s {
+                    &.active {
+                        background: none;
+                        color: rgb(117, 147, 231);
+                    }
+
+                    &:hover {
+                        background: none;
+                        color: rgb(117, 147, 231);
+                    }
+                }
+            }
+        }
+    }
+}
+// Main Body
+.siteWrapper {
+    width: 100%;
+    height: 100%;
+    // Section One 
+    .hero-section {
+        display: flex;
+        justify-content: center;
+        height: 85vh;
+        align-items: center;
+        background-color: color(primary-color);
+        @include tab-s {
+            height: 75vh;
+            padding-top: 5rem;
+        }
+        @include mob-s {
+            height: 80vh;
+            padding-top: 5rem;
+        }
+        .card1 {
+            text-align: center;
+            width: 55%;
+            height: max-content;
+
+            @include tab-s {
+                width: 85%;
+            }
+
+            h2 {
+                color: color(font-color);
+                font-size: 3rem;
+                line-height: 1.2;
+
+                @include tab-s {
+                    font-size: 2.5rem;
+                    line-height: 1.2;
+                }
+
+                @include mob-s {
+                    font-size: 1.75rem;
+                    line-height: 1.2;
+                }
+            }
+
+            .btn_1 {
+                text-decoration: none;
+                text-transform: uppercase;
+                color: color(font-color);
+                font-weight: bold;
+                font-size: 1.2rem;
+                font-family: 'Titillium Web', sans-serif;
+                display: inline-block;
+                width: 18rem;
+                line-height: 4rem;
+                font-display: smooth;
+                border-radius: 5px;
+                background-color: color(button1-bg);
+                box-shadow: 0px 5px color(button1-shadow);
+                margin: 1rem;
+                transition: all .2s;
+
+                @include mob-s {
+                    width: 12rem;
+                    line-height: 3.5rem;
+                    font-size: 1rem;
+                }
+
+                &:active {
+                    box-shadow: 0 0 transparent;
+                    transform: translateY(5px);
+                }
+            }
+        }
+    }
+    // Section 2
+    .base-section {
+        display: flex;
+        justify-content: center;
+        height: 90%;
+        align-items: center;
+        background-color: color(secondary-color);
+        @include mob-s{
+            height: 100%;
+        }
+        .card2 {
+            width: 65%;
+            margin: 5rem 0;
+            @include tab-s {
+                width: 80%;
+            }
+
+            h2 {
+                font-family: 'Titillium Web', sans-serif;
+                letter-spacing: 0.12em;
+                text-align: center;
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: color(font-color);
+
+                @include mob-s {
+                    font-size: 1.75rem;
+                    line-height: .5rem;
+                }
+
+            }
+
+            hr {
+                width: 5rem;
+                height: 5px;
+                border: none;
+                background-color: color(input-color);
+            }
+
+            p {
+                color: color(font-color);
+                text-align: center;
+                margin-bottom: 2rem;
+
+                a {
+                    text-decoration: none;
+                    color: color(font-color);
+
+                    &:hover {
+                        color: rgb(216, 216, 216);
+                    }
+                }
+            }
+            // Contact Form
+            .contact_form {
+                display: flex;
+                flex-direction: column;
+
+                input,
+                textarea {
+                    border: 1px solid color(input-color);
+                    background-color: color(input-color);
+                    color: color(font-color);
+                    padding: 1.2rem;
+                    border-radius: 7px;
+                    margin: 1rem;
+                    font-family: 'Titillium Web', sans-serif;
+                    font-size: 1.12rem;
+
+                    @include mob-s {
+                        font-size: 1rem;
+                    }
+
+                    &::placeholder {
+                        font-size: 1rem;
+                        font-family: 'Titillium Web', sans-serif;
+                        font-weight: 500;
+                        color: color(font-color);
+                        opacity: .75;
+                        z-index: 0;
+                    }
+                }
+
+                .inp {
+                    display: flex;
+                    flex-direction: row;
+
+                    @include mob-s {
+                        flex-direction: column;
+                    }
+                }
+
+                input {
+                    float: left;
+                    width: 50%;
+                    margin: 1rem;
+
+                    @include mob-s {
+                        width: auto;
+                    }
+                }
+
+                textarea {
+                    height: 120px;
+                }
+
+                .btn_2 {
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    color: color(font-color);
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                    font-family: 'Titillium Web', sans-serif;
+                    display: inline-block;
+                    width: 18rem;
+                    line-height: 4rem;
+                    border: none;
+                    border-radius: 5px;
+                    background-color: color(button2-bg);
+                    box-shadow: 0px 5px color(button2-shadow);
+                    align-self: center;
+                    transition: all .2s;
+
+                    @include mob-s {
+                        width: 12rem;
+                        line-height: 3.5rem;
+                        font-size: 1rem;
+                    }
+
+                    &:active {
+                        box-shadow: 0 0 transparent;
+                        transform: translateY(5px);
+                    }
+                }
+            }
+        }
+    }
+}
+.footer-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: color(footer-color);
+    height: 10vh;
+    cursor: default;
+
+    @include mob-s {
+        height: 100%;
+    }
+    .social_links {
+        @include mob-s {
+            padding: 1rem 0;
+        }
+        a{
+            font-size: 1.2rem;
+            font-weight: 510;
+            padding: 1rem 0;
+            margin: 0 1.5rem;
+            text-decoration: none;
+            color: color(font-color);
+            @include tab-s{
+                font-size: 1rem;
+                margin: 0 0.5rem;
+                padding: 0;
+            }
+            @include mob-s {
+                font-size: 1rem;
+                margin: 0 0.5rem;
+                padding: 0;
+            }
+
+            &:hover{
+                color:#30bae7;
+                transition:all .2s;
+            }
+        }
+    }
+}
